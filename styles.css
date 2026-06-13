@@ -1,7 +1,8 @@
+/* ========== СБРОС И ПЕРЕМЕННЫЕ ========== */
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
@@ -14,10 +15,10 @@ box-sizing: border-box;
     --accent-deep: #2d5a27;
     --accent-glow: #7cb96e;
     --border: #dce8d2;
-    --shadow-sm: 0 1px 3px rgba(30, 45, 26, 0.06);
-    --shadow-md: 0 4px 16px rgba(30, 45, 26, 0.08);
-    --shadow-lg: 0 12px 40px rgba(30, 45, 26, 0.12);
-    --shadow-xl: 0 24px 64px rgba(30, 45, 26, 0.16);
+    --shadow-sm: 0 1px 3px rgba(30,45,26,0.06);
+    --shadow-md: 0 4px 16px rgba(30,45,26,0.08);
+    --shadow-lg: 0 12px 40px rgba(30,45,26,0.12);
+    --shadow-xl: 0 24px 64px rgba(30,45,26,0.16);
     --radius-sm: 10px;
     --radius: 16px;
     --radius-lg: 24px;
@@ -26,17 +27,19 @@ box-sizing: border-box;
     --transition-fast: 0.15s ease;
 }
 
+/* ========== БАЗОВЫЕ СТИЛИ ========== */
 body {
     font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
     overflow-x: hidden;
-    background-image: radial-gradient(ellipse at 15% 10%, rgba(74,140,63,0.04) 0%, transparent 60%),
-    radial-gradient(ellipse at 85% 90%, rgba(199,153,62,0.05) 0%, transparent 60%);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-image:
+    radial-gradient(ellipse at 15% 10%, rgba(74,140,63,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 90%, rgba(199,153,62,0.05) 0%, transparent 60%);
 }
 
 .main {
@@ -55,48 +58,26 @@ body {
     display: block;
     text-align: left;
 }
-.tab-content h2,
-.tab-content .section-subtitle,
-.hero-badge,
-.hero-title,
-.hero-subtitle {
-    text-align: left;
-    margin-left: 0;
-    margin-right: auto;
-}
-.hero-subtitle,
-.timeline,
-.program-timeline {
-    max-width: 800px;
-}
-.cards-grid,
-.works-list,
-.program-timeline,
-.timeline,
-.slider-container,
-.directions-wrapper {
-    margin-left: 0;
-    margin-right: auto;
-}
+
 @keyframes fadeSlide {
     from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Header */
+/* ========== HEADER ========== */
 .header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(255,255,255,0.82);
+    background: rgba(255,255,255,0.85);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     padding: 0 clamp(1rem, 5vw, 2rem);
-    transition: box-shadow 0.2s, background 0.2s;
+    transition: box-shadow 0.3s, background 0.3s;
 }
 .header.scrolled {
     box-shadow: var(--shadow-lg);
-    background: rgba(255,255,255,0.94);
+    background: rgba(255,255,255,0.96);
 }
 .header-inner {
     max-width: 1300px;
@@ -107,6 +88,8 @@ body {
     height: clamp(60px, 8vw, 72px);
     gap: 1rem;
 }
+
+/* Логотип */
 .logo {
     display: flex;
     align-items: center;
@@ -139,7 +122,7 @@ body {
     line-height: 1.2;
 }
 
-/* Glass-индикатор (облегчённая версия) */
+/* ========== НАВИГАЦИЯ (ДЕСКТОП) ========== */
 .nav-tabs {
     position: relative;
     display: flex;
@@ -147,17 +130,23 @@ body {
     list-style: none;
     flex-wrap: nowrap;
     margin: 0 auto;
-    padding: 0;
+    padding: 4px;
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 40px;
+    border: 1px solid var(--border);
 }
 .tab-indicator {
     position: absolute;
-    background: rgba(74, 140, 63, 0.2);
+    background: var(--accent);
     border-radius: 32px;
-    transition: left 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.2), width 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+    transition: left 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2),
+    width 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
     z-index: 0;
+    height: calc(100% - 8px);
+    top: 4px;
+    box-shadow: 0 2px 12px rgba(74,140,63,0.3);
     pointer-events: none;
-    box-shadow: 0 0 0 0.5px rgba(74, 140, 63, 0.4), 0 2px 8px rgba(0,0,0,0.05);
-    will-change: left, width;
 }
 .nav-tab {
     position: relative;
@@ -171,63 +160,45 @@ body {
     font-weight: 500;
     color: var(--text-muted);
     cursor: pointer;
-    transition: color 0.2s;
     background: transparent;
     border: none;
     font-family: inherit;
     white-space: nowrap;
+    transition: color 0.2s;
 }
+.nav-tab:hover { color: var(--text); }
+.nav-tab.active { color: #ffffff; }
 .nav-tab .material-symbols-outlined {
     font-size: clamp(1rem, 2vw, 1.25rem);
 }
-.nav-tab:hover {
-    color: var(--text);
-}
-.nav-tab.active {
-    color: #1e2d1a;
-}
-@media (min-width: 901px) {
-    .nav-tabs {
-        gap: 4px;
-    }
-    .nav-tab {
-        padding: 6px 14px;
-        font-size: 0.85rem;
-    }
-}
-@media (min-width: 1200px) {
-    .nav-tab {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-    }
-}
 
-/* Mobile menu */
+/* ========== МОБИЛЬНОЕ МЕНЮ ========== */
 .mobile-menu-btn {
     display: none;
     background: none;
     border: none;
     color: var(--text);
     cursor: pointer;
-    padding: 8px;
+    padding: 12px;
     border-radius: 50%;
     flex-shrink: 0;
 }
 .mobile-menu-btn .material-symbols-outlined {
-    font-size: 2rem;
+    font-size: 2.4rem;
 }
 .mobile-menu-btn:hover {
     background: var(--surface-alt);
 }
+
 .mobile-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(16px);
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(20px);
     z-index: 1500;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.25s;
+    transition: opacity 0.3s;
 }
 .mobile-overlay.show {
     opacity: 1;
@@ -240,27 +211,33 @@ body {
     transform: translate(100%, -50%);
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 0 1.5rem;
-    opacity: 0;
-    transition: transform 0.3s, opacity 0.2s;
+    gap: 16px;
+    padding: 0 2rem;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .mobile-overlay.show .mobile-menu-container {
     transform: translate(0, -50%);
-    opacity: 1;
 }
+/* Кнопки в мобильном меню – крупные и удобные */
 .mobile-menu-container .nav-tab {
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(16px);
     color: white;
+    font-size: 1.15rem;
+    padding: 16px 24px;
+    gap: 12px;
+    min-width: 220px;
     justify-content: flex-start;
-    min-width: 200px;
+    border-radius: 40px;
 }
 .mobile-menu-container .nav-tab.active {
     background: var(--accent);
 }
+.mobile-menu-container .nav-tab .material-symbols-outlined {
+    font-size: 1.8rem;
+}
 
-/* Hero */
+/* ========== ГЛАВНАЯ: HERO ========== */
 .section-hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -306,9 +283,9 @@ body {
     font-size: clamp(0.9rem, 2vw, 1.1rem);
     color: var(--text-muted);
     margin-bottom: 2rem;
+    max-width: 800px;
 }
 .hero-visual {
-    position: relative;
     display: flex;
     justify-content: center;
 }
@@ -333,8 +310,8 @@ body {
     overflow-x: auto;
 }
 .code-block .keyword { color: #f0a860; }
-.code-block .string { color: #8cc76d; }
-.code-block .func { color: #e0c97a; }
+.code-block .string  { color: #8cc76d; }
+.code-block .func    { color: #e0c97a; }
 .code-caption {
     text-align: center;
     margin-top: 1rem;
@@ -342,7 +319,7 @@ body {
     color: var(--text-muted);
 }
 
-/* Cards */
+/* ========== КАРТОЧКИ ========== */
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -378,7 +355,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* Timeline */
+/* ========== ИСТОРИЯ (ТАЙМЛАЙН) ========== */
 .timeline {
     position: relative;
     padding-left: 2rem;
@@ -421,21 +398,8 @@ body {
     gap: 6px;
     margin-bottom: 0.3rem;
 }
-@media (max-width: 600px) {
-    .timeline {
-        padding-left: 1.5rem;
-    }
-    .timeline-item {
-        padding-left: 1.5rem;
-    }
-    .timeline-item::before {
-        left: -2px;
-        width: 14px;
-        height: 14px;
-    }
-}
 
-/* Teacher Profile */
+/* ========== ПРЕПОДАВАТЕЛЬ ========== */
 .teacher-profile {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -499,11 +463,9 @@ body {
     color: var(--text);
     transition: color 0.2s;
 }
-.phone-link:hover {
-    color: var(--accent);
-}
+.phone-link:hover { color: var(--accent); }
 
-/* Slider (улучшен для мобильных) */
+/* ========== СЛАЙДЕР ========== */
 .slider-container {
     position: relative;
     max-width: 1000px;
@@ -517,16 +479,17 @@ body {
 .slider {
     position: relative;
 }
-.slider .slide {
+.slide {
     display: none;
+    position: relative;
 }
-.slider .slide.active {
+.slide.active {
     display: block;
     animation: fadeImg 0.3s;
 }
 @keyframes fadeImg {
     from { opacity: 0; }
-    to { opacity: 1; }
+    to   { opacity: 1; }
 }
 .slide img {
     width: 100%;
@@ -565,9 +528,7 @@ body {
     transition: background 0.2s, transform 0.1s;
     z-index: 10;
 }
-.slider-btn:hover {
-    background: var(--accent);
-}
+.slider-btn:hover { background: var(--accent); }
 .prev { left: 12px; }
 .next { right: 12px; }
 .slider-dots {
@@ -608,25 +569,8 @@ body {
     z-index: 5;
     pointer-events: none;
 }
-/* Увеличение кнопок на мобильных */
-@media (max-width: 600px) {
-    .slider-btn {
-        width: 44px;
-        height: 44px;
-    }
-    .slider-btn .material-symbols-outlined {
-        font-size: 28px;
-    }
-    .prev { left: 8px; }
-    .next { right: 8px; }
-    .slider-counter {
-        bottom: 12px;
-        right: 12px;
-        font-size: 0.7rem;
-    }
-}
 
-/* Works, Program */
+/* ========== ДОСТИЖЕНИЯ ========== */
 .works-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -661,6 +605,8 @@ body {
     gap: 12px;
     margin-top: 0.5rem;
 }
+
+/* ========== ПРОГРАММА ========== */
 .program-timeline {
     display: flex;
     flex-direction: column;
@@ -686,7 +632,7 @@ body {
     color: var(--accent);
 }
 
-/* Directions */
+/* ========== КАК ДОБРАТЬСЯ ========== */
 .directions-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -753,10 +699,8 @@ body {
     background: var(--accent-deep);
     transform: translateY(-2px);
 }
-.section-subtitle {
-    color: var(--text-muted);
-    margin-bottom: 1rem;
-}
+
+/* ========== ФУТЕР ========== */
 .footer {
     background: var(--surface);
     border-top: 1px solid var(--border);
@@ -770,7 +714,7 @@ body {
     flex-wrap: wrap;
 }
 
-/* Responsive */
+/* ========== АДАПТИВНОСТЬ ========== */
 @media (max-width: 900px) {
     .desktop-nav {
         display: none;
@@ -798,13 +742,6 @@ body {
     .map-container {
         height: 300px;
     }
-    .tab-content h2,
-    .tab-content .section-subtitle,
-    .hero-badge,
-    .hero-title,
-    .hero-subtitle {
-        text-align: left;
-    }
     .cards-grid,
     .works-list {
         grid-template-columns: 1fr;
@@ -819,12 +756,43 @@ body {
     .hero-title {
         font-size: 2rem;
     }
+    /* Увеличенные кнопки слайдера на мобильных */
+    .slider-btn {
+        width: 52px;
+        height: 52px;
+    }
+    .slider-btn .material-symbols-outlined {
+        font-size: 32px;
+    }
+    .prev { left: 8px; }
+    .next { right: 8px; }
+    .slider-counter {
+        bottom: 12px;
+        right: 12px;
+        font-size: 0.7rem;
+    }
 }
+
 @media (min-width: 901px) {
     .mobile-overlay {
         display: none;
     }
 }
+
+@media (max-width: 600px) {
+    .timeline {
+        padding-left: 1.5rem;
+    }
+    .timeline-item {
+        padding-left: 1.5rem;
+    }
+    .timeline-item::before {
+        left: -2px;
+        width: 14px;
+        height: 14px;
+    }
+}
+
 @media (max-width: 480px) {
     .nav-tab {
         padding: 4px 10px;
